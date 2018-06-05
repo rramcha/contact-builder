@@ -1,33 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+
 import { User } from '../../models/User';
 
 @Component({
-    selector: 'app-user',
-    templateUrl: './user.component.html',
-    styles: [`
-    h2{
-        color:red;
-    }
-    `]
-  })
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
+})
 
 export class UserComponent implements OnInit {
-    User: User;
-    constructor() {
-    }
+  // Properties
+  user: User;
 
-    ngOnInit() {
-        this.User = {
-            firstName: 'Ravi',
-            lastName: 'Ram',
-            age: 22,
-            address: {
-            street: '11 lawmover st',
-            city: 'Bangalore',
-            country: 'India'
-            }
-        };
+  // Methods
+  constructor() {
+    
+  } 
+
+  ngOnInit() {
+    this.user = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john@gmail.com'
     }
+  }
 }
-
-

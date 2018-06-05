@@ -1,5 +1,8 @@
 export interface User {
-    firstName: string;
-    lastName: string;
-    age?: number; // Making this field optional
+  firstName: string,
+  lastName: string,
+  email: string,
+  isActive?: boolean,
+  registered?: any,
+  hide?: boolean
 }
