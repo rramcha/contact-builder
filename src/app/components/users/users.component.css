@@ -1,3 +1,15 @@
-.big-text {
-  text-transform: uppercase;
+.highlight-text{
+    font-size: 25px ;
+}
+
+.disabledButton{
+    color: red;
+}
+
+.myClass{
+    color: black;
+}
+
+.setBorder {
+    border-color: red;
 }

@@ -1,71 +1,63 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {User} from '../models/user';
+import { Observable } from 'rxjs/observable';
 import { of } from 'rxjs/observable/of';
 
-import { User } from '../models/User';
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
-  users: User[];
+
+  user: User[];
   data: Observable<any>;
+  constructor() {
 
-  constructor() { 
-    this.users = [
+    
+
+    this.user = [
       {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@gmail.com',
+        firstName: 'Ravi',
+        lastName: 'chandra',
+        email: 'ravi@gmail.com',
         isActive: true,
-        registered: new Date('01/02/2018 08:30:00'),
-        hide: true
-      },
-      {
-        firstName: 'Kevin',
-        lastName: 'Johnson',
-        email: 'kevin@yahoo.com',
+        show: true,
+        joined: new Date()
+       },
+       {
+        firstName: 'Satish',
+        lastName: 'Mishra',
+        email: 'satish@gmail.com',
         isActive: false,
-        registered: new Date('03/11/2017 06:20:00'),
-        hide: true
-      },
-      {
-        firstName: 'Karen',
-        lastName: 'Williams',
-        email: 'karen@gmaial.com',
-        isActive: true,
-        registered: new Date('11/02/2016 10:30:00'),
-        hide: true
-      }
+        show: true,
+        joined: new Date()
+       },
+       {
+        firstName: 'Vinod',
+        lastName: 'Sharma',
+        email: 'vinod@gmail.com',
+        isActive: false,
+        show: false,
+        joined: new Date()
+        }
     ];
+
   }
 
-  getData() {
-    this.data = new Observable(observer => {
-      setTimeout(() => {
-        observer.next(1);
-      }, 1000);
+    
+  //  getUsers() {
+  //    console.log('Service invoked!!!');
+  //   return this.user;
+  // }
 
-      setTimeout(() => {
-        observer.next(2);
-      }, 2000);
-
-      setTimeout(() => {
-        observer.next(3);
-      }, 3000);
-
-      setTimeout(() => {
-        observer.next({name: 'Brad'});
-      }, 4000);
-    });
-
-    return this.data;
-  }
-
+  // Using observables
   getUsers(): Observable<User[]> {
-    return of(this.users);
-  }
+    console.log('Service invoked!!!');
+   return of(this.user);
+ }
 
-  addUser(user: User) {
-    this.users.unshift(user);
+
+  addUsers(val){
+    this.user.unshift(val);
   }
 
 }

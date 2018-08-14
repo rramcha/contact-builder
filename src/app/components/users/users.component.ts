@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/User'; 
 
 @Component({
   selector: 'app-users',
@@ -8,46 +8,45 @@ import { User } from '../../models/User';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  user: User = {
+
+  formUser: User = {
     firstName: '',
     lastName: '',
-    email: ''
-  }
-  users: User[];
-  showExtended: boolean = true;
-  loaded: boolean = false;
-  enableAdd: boolean = false;
-  showUserForm: boolean = false;
-  @ViewChild('userForm') form: any;
+    email: '',
+    joined: new Date()
+   };
+
+  user: User[];
+  disableButton: boolean = false;
+  onSuccess: boolean = true;  // Issue in Angular not working
+  onProcess: boolean = false;
+  showForm: boolean = false;
+  showExtended: boolean = false;
+  currentClasses = {};
   data: any;
+  @ViewChild('userForm') form: any;
 
-  constructor(private userService: UserService) { }
+  constructor(public UserService: UserService) { }
+  onSubmit(userForm) {
+    // this.user.unshift(userForm.value);
+    this.UserService.addUsers(userForm.value);
+  }
 
+  removeUser(){
+    this.user.pop();
+  }
   ngOnInit() {
-      this.userService.getData().subscribe(data => {
-        console.log(data);
-      });
-   
-      this.userService.getUsers().subscribe(users => {
-        this.users = users;
-        this.loaded = true;
-      });
+    // this.user = this.DataService.getUsers();
+    // console.log(this.user);
+    this.UserService.getUsers().subscribe(
+      data => this.user = data,
+      error => console.log(error)
+);
+  // this.DataService.getUsers().subscribe(function(data){
+  //   return this.user = data;
+  // }, function(error){
+  //   console.log(error);
+  // });
+ }
 
-  }
-
-  onSubmit({value, valid}: {value: User, valid: boolean}) {
-    if(!valid){
-      console.log('Form is not valid');
-    } else {
-      value.isActive = true;
-      value.registered = new Date();
-      value.hide = true;
-
-      this.userService.addUser(value);
-
-      this.form.reset();
-    }
-  }
-
-  
 }
